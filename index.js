@@ -1,4 +1,8 @@
-require('dotenv').config();
+const envPath = process.env.NODE_ENV
+  ? `.env.${process.env.NODE_ENV}`
+  : '.env';
+
+require('dotenv').config(envPath);
 
 const app = require('express')();
 const mongoose = require('mongoose');
@@ -19,3 +23,5 @@ app.use('/api', require('./app/routes'));
 app.use(Raven.errorHandler());
 
 app.listen(3000);
+
+module.exports = app;
