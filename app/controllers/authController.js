@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sendMail = require('../services/mailer');
 
 const User = mongoose.model('User');
 
@@ -32,6 +33,14 @@ module.exports = {
         return res.status(400).json({ error: 'User already exitst' });
       }
       const user = await User.create(req.body);
+
+      await sendMail({
+        from: 'Kelwin Henrique <kelwin.ferreira@zup.com.br>',
+        to: user.email,
+        subject: 'Bem vindo ao meu Twitter',
+        html: 'Olá, seja bem vindo',
+      });
+
       return res.json({
         user,
         token: user.generateToken(),
