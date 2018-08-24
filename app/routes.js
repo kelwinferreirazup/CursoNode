@@ -28,11 +28,20 @@ routes.delete('/tweets/:id', controllers.tweetController.destroy);
 /**
  * Users
  */
+routes.get('/me', controllers.userController.me);
 routes.put('/users', controllers.userController.update);
+routes.get('/feed', controllers.userController.feed);
+
 
 /**
  * Like
  */
 routes.post('/like/:id', controllers.likeController.toggle);
+
+/**
+ * Follows
+ */
+routes.post('/follow/:id', controllers.followController.create);
+routes.delete('/unfollow/:id', controllers.followController.destroy);
 
 module.exports = routes;
