@@ -29,6 +29,8 @@
     "chai-http": "^4.0.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "factory-girl": "^5.0.2",
+    "faker": "^4.1.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.0.6"
   }
