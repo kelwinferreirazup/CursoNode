@@ -45,13 +45,28 @@ describe('Authentication', () => {
     it('it should be able to authenticate with credentials', async function() {
       this.timeout(15000);
       const user = await factory.attrs('User');
-      console.log(user);
       const response = await chai.request(app)
         .post('/api/signup')
         .send(user);
 
       expect(response.body).to.have.property('user');
       expect(response.body).to.have.property('token');
+
+    });
+
+    it('it should be able to sing up with duplicate', async function() {
+      this.timeout(15000);
+      const user = await factory.create('User');
+      const user2 = await factory.attrs('User', {
+        email: user.email,
+      });
+      console.log(user2);
+      const response = await chai.request(app)
+        .post('/api/signup')
+        .send(user);
+
+      expect(response).to.have.status(400);
+      expect(response.body).to.have.property('error');
 
     });
   });
